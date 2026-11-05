@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A Confession</title>
+  <!-- Fonts: Playfair Display (headings) + Caveat (handwriting). Falls back to system fonts offline. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Playfair+Display:ital,wght@0,600;1,600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<!-- "locked" stops scrolling until the button is pressed (script.js removes it) -->
+
+<body class="locked">
+
+  <!-- ===== HERO: the gateway ===== -->
+  <header class="hero">
+    <div id="intro">
+      <p class="kicker">There's something I wanna tell you</p>
+      <button class="btn" id="openBtn" type="button">Open My Heart</button>
+    </div>
+    <!-- Hidden until the button is pressed -->
+    <div class="reveal" id="reveal" hidden>
+      <div class="scene">
+        <div class="heart" id="heart" aria-hidden="true"></div>
+      </div>
+      <p class="kicker">A confession for</p>
+      <h1 id="partnerName"></h1>
+      <a class="cue" href="#timeline">Scroll down &darr;</a>
+    </div>
+  </header>
+
+  <!-- ===== STORY: hidden until unlocked. Contents are built from CONFIG in script.js ===== -->
+  <main id="story" hidden>
+    <section id="timeline" class="tint">
+      <div class="wrap">
+        <h2>Digital Diary</h2>
+        <p class="hint timeline-hint">Tap an envelope to open it</p>
+        <div id="steps"></div>
+      </div>
+    </section>
+
+    <section id="songs">
+      <div class="wrap">
+        <h2>Songs That Made Me Think Of You</h2>
+        <div class="songs" id="songGrid"></div>
+      </div>
+    </section>
+
+    <section id="letter" class="tint">
+      <div class="wrap center">
+        <h2>My Confession</h2>
+        <button class="envelope" id="envelope" type="button" aria-label="Open my confession letter">
+          <span class="paper"></span><span class="front"></span><span class="flap"></span><span
+            class="seal">&hearts;</span>
+        </button>
+        <p class="hint">Tap the envelope</p>
+      </div>
+    </section>
+    <!-- ===== THE QUESTION: the yes / no moment ===== -->
+    <section id="question">
+      <div class="wrap center">
+        <h2 id="questionTitle"></h2>
+        <div class="answers" id="answers">
+          <button class="btn" id="yesBtn" type="button"></button>
+          <button class="btn ghost" id="noBtn" type="button"></button>
+        </div>
+        <p class="hint" id="noHint" aria-live="polite"></p>
+        <div class="yes" id="yesBox" hidden aria-live="polite">
+          <h3 id="yesTitle"></h3>
+          <p id="yesText"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== CONFESSION LETTER POP-UP (native <dialog>: handles focus and Esc for us) ===== -->
+  <dialog id="letterDialog" aria-labelledby="letterTitle">
+    <button class="close" type="button" aria-label="Close letter">&times;</button>
+    <div id="letterBody"></div>
+  </dialog>
+
+  <!-- ===== MEMORY POP-UP: one shared <dialog>, filled with the photo + text of whichever envelope was opened ===== -->
+  <dialog id="memoryDialog" class="memory" aria-labelledby="memoryTitle">
+    <button class="close" type="button" aria-label="Close memory">&times;</button>
+    <div class="memo">
+      <img id="memoryImg" src="" alt="">
+      <div>
+        <h2 id="memoryTitle"></h2>
+        <p id="memoryText"></p>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- GSAP + ScrollTrigger from a CDN. If offline, the site still works, just without scroll animations. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
